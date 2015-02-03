@@ -9,6 +9,7 @@ var methodOverride = require("method-override");
 //configuration--------------------------
 mongoose.connect("mongodb://node:node@proximus.modulusmongo.net:27017/nyji5Dom");
 
+app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public')); // set the static files location
 app.use(morgan('dev')); // log every request to the console.
 app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
@@ -86,26 +87,9 @@ app.get('*',function(req,res){
 });
 
 //listen(start the app BITCHES !!!)
-app.listen(1337);
-console.log("application running on port 1337");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.listen(app.get('port'),function(){
+	console.log("application running on port " + app.get('port'));	
+});
 
 
 
